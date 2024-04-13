@@ -1,0 +1,38 @@
+const { getDateTime } = require('./db');
+
+const express = require('express');
+var cors = require('cors')
+const morgan = require('morgan');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Enable All CORS Requests
+// https://expressjs.com/en/resources/middleware/cors.html
+app.use(cors())
+
+// setup the logger
+app.use(morgan('tiny'));
+
+app.get('/', async (req, res) => {
+  const dateTime = await getDateTime();
+  const response = dateTime;
+  response.api = 'Hello from Node';
+  console.log(response)
+  res.send(response);
+});
+
+app.get('/ping', async (_, res) => {
+  res.send('pong');
+});
+
+const server = app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+process.on('SIGTERM', () => {
+  console.debug('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.debug('HTTP server closed');
+  });
+});

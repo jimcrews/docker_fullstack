@@ -1,0 +1,24 @@
+{
+    "name": "api-node",
+    "version": "1.0.0",
+    "description": "simple api that connects to postgres",
+    "main": "src/index.js",
+    "scripts": {
+        "dev": "nodemon src/index.js",
+        "debug": "nodemon --inspect ./src/index.js",
+        "debug-docker": "nodemon --inspect=0.0.0.0:9229 ./src/index.js",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.19.2",
+        "morgan": "^1.10.0",
+        "pg": "^8.11.5"
+    },
+    "devDependencies": {
+        "jest": "^29.4.1",
+        "nodemon": "^3.1.0"
+    }
+}
